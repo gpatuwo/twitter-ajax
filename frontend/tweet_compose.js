@@ -6,6 +6,7 @@ class TweetCompose {
     this.submit();
     this.handleContent();
     this.addMentionedUser();
+    this.removeMentionedUser();
   }
 
   submit(){
@@ -56,7 +57,22 @@ class TweetCompose {
       $('.selector').append($(`${$scriptTag.html()}`));
       $("select").on("change", e => {
         let val = $("select option:selected").text();
-        let $val = $("<li>").text(`${val}`);
+        let $val = $(`<li>${val}\
+          <a href="javascript:void(0)" class="remove-mentioned-user">Remove</a>\
+          </li>`);
+        $(".mentioned-users").find("ul").append($val);
+      });
+    });
+  }
+
+  removeMentionedUser(){
+    $("a.remove-mentioned-user").on("click", event => {
+      // if click on remove, nothing happens. doesn't enter this function
+      $("select").on("change", e => {
+        let val = $("select option:selected").text();
+        let $val = $(`<li>${val}\
+          <a href="javascript:void(0)" class="remove-mentioned-user">Remove</a>\
+          </li>`);
         $(".mentioned-users").find("ul").append($val);
       });
     });
