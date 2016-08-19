@@ -5,6 +5,7 @@ class TweetCompose {
     this.$mention = $el.find('option');
     this.submit();
     this.handleContent();
+    this.addMentionedUser();
   }
 
   submit(){
@@ -49,7 +50,17 @@ class TweetCompose {
     }));
   }
 
-
+  addMentionedUser(){
+    $("a.add-mentioned-user").on("click", event => {
+      let $scriptTag = this.$el.find('script');
+      $('.selector').append($(`${$scriptTag.html()}`));
+      $("select").on("change", e => {
+        let val = $("select option:selected").text();
+        let $val = $("<li>").text(`${val}`);
+        $(".mentioned-users").find("ul").append($val);
+      });
+    });
+  }
 }
 
 module.exports = TweetCompose;

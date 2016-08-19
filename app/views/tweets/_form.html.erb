@@ -16,13 +16,29 @@
 
   <label>
     Mention
-    <select name="tweet[mentioned_user_ids][]">
+    <script type="text/template">
+      <select name="tweet[mentioned_user_ids][]">
       <option></option>
       <% User.all.each do |user| %>
         <option value="<%= user.id %>"><%= user.username %></option>
       <% end %>
-    </select>
+      </select>
+    </script>
+
+    <div class="mentioned-users">
+      <p>
+        You're mentioning the following users:
+      </p>
+      <ul>
+        
+      </ul>
+      <!-- will house all newly generated select tags -->
+    </div>
   </label>
+
+<div class="selector">
+  <a href="javascript:void(0)" class="add-mentioned-user">Add Mention User</a>
+</div>
   <br>
 
   <input type="Submit" value="Post Tweet!">
